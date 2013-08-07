@@ -1,3 +1,24 @@
+## 0.8.3
+
+ * Fix: When auto-detecting whether the first parameter to `jsdom.env` is a HTML string or a filename, deal with long strings correctly instead of erroring. (baryshev)
+
+## 0.8.2
+
+ * Add: basic `window.history` support, including `back`, `forward`, `go`, `pushState`, and `replaceState`. (ralphholzmann)
+ * Add: If an `<?xml?>` declaration starts the document, will try to parse as XML, e.g. not lowercasing the tags. (robdodson)
+ * Fix: tag names passed to `createElement` are coerced to strings before evaluating.
+
+## 0.8.1 (hotfix)
+
+ * Fix: a casing issue that prevented jsdom from loading on Unix and Solaris systems. (dai-shi)
+ * Fix: `window.location.replace` was broken. (dai-shi)
+ * Fix: update minimum htmlparser2 version, to ensure you get the latest parsing-related bugfixes.
+
+## 0.8.0
+
+ * Add: working `XMLHttpRequest` support, including cookie passing! (dai-shi)
+ * Add: there is now a `window.navigator.noUI` property that evaluates to true, if you want to specifically distinguish jsdom in your tests.
+
 ## 0.7.0
 
  * Change: the logic when passing `jsdom.env` a string is more accurate, and you can be explicit by using the `html`, `url`, or `file` properties. This is a breaking change in the behavior of `html`, which used to do the same auto-detection logic as the string-only version.

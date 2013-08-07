@@ -86,14 +86,15 @@ var files = [
   //"level3/ls.js",
   "level3/xpath.js",
   "window/index.js",
+  "window/history.js",
   "window/script.js",
+  "window/console.js",
   "window/frame.js",
   "sizzle/index.js",
   "jsdom/index.js",
   "jsdom/parsing.js",
   "jsdom/env.js",
   "jsonp/jsonp.js",
-  "browser/contextifyReplacement.js",
   "browser/index.js"
 ];
 

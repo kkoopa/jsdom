@@ -126,8 +126,9 @@ jsdom.env(config);
 - `config.src`: an array of JavaScript strings that will be evaluated against the resulting document. Similar to `scripts`, but it accepts JavaScript instead of paths/URLs.
 - `config.done`: see `callback` above.
 - `config.document`:
-  - `referer`: the new document will have this referer
-  - `cookie`: manually set a cookie value, e.g. `'key=value; expires=Wed, Sep 21 2011 12:00:00 GMT; path=/'`
+  - `referer`: the new document will have this referer.
+  - `cookie`: manually set a cookie value, e.g. `'key=value; expires=Wed, Sep 21 2011 12:00:00 GMT; path=/'`.
+  - `cookieDomain`: a cookie domain for the manually set cookie; defaults to `127.0.0.1`.
 - `config.features` : see `Flexibility` section below. **Note**: the default feature set for jsdom.env does _not_ include fetching remote JavaScript and executing it. This is something that you will need to **carefully** enable yourself.
 
 Note that `config.done` is required, as is one of `config.html`, `config.file`, or `config.url`.
@@ -139,7 +140,7 @@ If you want to spawn a document/window and specify all sorts of options this is 
 ```js
 var jsdom = require("jsdom").jsdom;
 var doc = jsdom(markup, level, options);
-var window = doc.createWindow();
+var window = doc.parentWindow;
 ```
 
 - `markup` is an HTML/XML document to be parsed. You can also pass `null` or an undefined value to get a basic document with empty `<head>` and `<body>` tags. Document fragments are also supported (including `""`), and will behave as sanely as possible (e.g. the resulting document will lack the `head`, `body` and `documentElement` properties if the corresponding elements aren't included).
@@ -212,15 +213,6 @@ jsdom includes support for using the [canvas](https://npmjs.org/package/canvas) 
 
 ## More Examples
 
-### Creating a document-less window
-
-```js
-var jsdom = require("jsdom");
-var window = jsdom.createWindow();
-
-console.log(window.document); // output: undefined
-```
-
 ### Creating a document
 
 ```js
@@ -235,7 +227,7 @@ console.log(doc.nodeName); // outputs: #document
 ```js
 var jsdom = require("jsdom").jsdom;
 var document = jsdom("<html><head></head><body>hello world</body></html>");
-var window = document.createWindow();
+var window = document.parentWindow;
 
 console.log(window.document.innerHTML);
 // output: "<html><head></head><body>hello world</body></html>"
@@ -251,7 +243,7 @@ console.log(typeof window.document.getElementsByClassName);
 
 ```js
 var jsdom = require("jsdom");
-var window = jsdom.jsdom().createWindow();
+var window = jsdom.jsdom().parentWindow;
 
 jsdom.jQueryify(window, "http://code.jquery.com/jquery.js", function () {
   window.$("body").append('<div class="testing">Hello World, It works</div>');
@@ -264,7 +256,7 @@ jsdom.jQueryify(window, "http://code.jquery.com/jquery.js", function () {
 
 ```js
 var jsdom = require("jsdom").jsdom;
-var window = jsdom().createWindow();
+var window = jsdom().parentWindow;
 
 window.__myObject = { foo: "bar" };
 
@@ -279,27 +271,28 @@ window.document.body.appendChild(scriptEl);
 ## Test Compliance:
 
 ```
- level1/core                        535/535      100%
- level1/html                        238/238      100%
- level1/svg                         527/527      100%
- level2/core                        283/283      100%
- level2/html                        706/706      100%
- level2/style                         15/15      100%
- level2/extra                           4/4      100%
- level2/events                        24/24      100%
- level3/xpath                         93/93      100%
- window/index                           7/7      100%
- window/script                        10/10      100%
- window/frame                         16/16      100%
- sizzle/index                         14/14      100%
- jsdom/index                          87/87      100%
- jsdom/parsing                          8/8      100%
- jsdom/env                            13/13      100%
- jsonp/jsonp                            1/1      100%
- browser/contextifyReplacement          4/4      100%
- browser/index                        34/34      100%
-------------------------------------------------------
-TOTALS: 0/2619 failed; 100% success
+ level1/core         535/535      100%
+ level1/html         238/238      100%
+ level1/svg          527/527      100%
+ level2/core         283/283      100%
+ level2/html         706/706      100%
+ level2/style          15/15      100%
+ level2/extra            4/4      100%
+ level2/events         24/24      100%
+ level3/xpath          93/93      100%
+ window/index            7/7      100%
+ window/history          5/5      100%
+ window/script         10/10      100%
+ window/console          2/2      100%
+ window/frame          16/16      100%
+ sizzle/index          14/14      100%
+ jsdom/index           76/76      100%
+ jsdom/parsing         11/11      100%
+ jsdom/env             25/25      100%
+ jsonp/jsonp             1/1      100%
+ browser/index         34/34      100%
+---------------------------------------
+TOTALS: 0/2626 failed; 100% success
 ```
 
 ### Running the tests
