@@ -1,11 +1,38 @@
+## 0.8.9
+
+* Upgrade: `cssom` to 0.3.0, adding support for `@-moz-document` and fixing a few other issues.
+* Upgrade: `cssstyle` to 0.2.6, adding support for many shorthand properties and better unit handling.
+
+## 0.8.8
+
+* Fix: avoid repeated `NodeList.prototype.length` calculation, for a speed improvement. (peller)
+
+## 0.8.7
+
+* Add: `host` property to `HTMLAnchorElement`. (sporchia)
+
+## 0.8.6
+
+* Fix: stop accidentally modifying `Error.prototype`. (mitar)
+* Add: a dummy `getBoundingClientRect` method, that returns `0` for all properties of the rectangle, is now implemented. (F1LT3R)
+
+## 0.8.5
+
+* Add: `href` property on `CSSStyleSheet` instances for external CSS files. (FrozenCow)
+
+## 0.8.4
+
+ * Add: typed array constructors on the `window`. (nlacasse)
+ * Fix: `querySelector` and `querySelectorAll` should be on the prototypes of `Element` and `Document`, not own-properties. (mbostock)
+
 ## 0.8.3
 
- * Fix: When auto-detecting whether the first parameter to `jsdom.env` is a HTML string or a filename, deal with long strings correctly instead of erroring. (baryshev)
+ * Fix: when auto-detecting whether the first parameter to `jsdom.env` is a HTML string or a filename, deal with long strings correctly instead of erroring. (baryshev)
 
 ## 0.8.2
 
  * Add: basic `window.history` support, including `back`, `forward`, `go`, `pushState`, and `replaceState`. (ralphholzmann)
- * Add: If an `<?xml?>` declaration starts the document, will try to parse as XML, e.g. not lowercasing the tags. (robdodson)
+ * Add: if an `<?xml?>` declaration starts the document, will try to parse as XML, e.g. not lowercasing the tags. (robdodson)
  * Fix: tag names passed to `createElement` are coerced to strings before evaluating.
 
 ## 0.8.1 (hotfix)
